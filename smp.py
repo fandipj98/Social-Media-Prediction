@@ -1,6 +1,6 @@
 import time
 
-newFile = open("tags.txt","a")
+newFile = open("data.csv","a")
 tag = open("train_tags.json", "r")
 category = open("train_category.json", "r")
 temporal = open("train_temporalspatial.json", "r")
