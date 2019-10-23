@@ -8,6 +8,7 @@ label = open("train_label.txt", "r")
 
 lines = tag.read()
 pos = -1
+check = -1
 
 lines2 = category.read()
 pos2 = -1
@@ -23,6 +24,11 @@ pos5 = 0
 while True:
     
     pos = lines.find('Alltags', pos+1)
+    check = lines.find('Alltags', pos)
+
+    if check == -1:
+        break
+
     # print(pos)
     index = pos+11
     count = 1
@@ -32,11 +38,9 @@ while True:
         if lines[index]==' ':
             count += 1
         if lines[index]=='"':
+            check = -1
             break
     # print (count)
-    if pos == -1:
-        newFile.write(str(count))
-        break
     newFile.write(str(count)+',')
 
     pos2 = lines2.find('Category', pos2+1)
@@ -115,6 +119,7 @@ while True:
         else:
             newFile.write(str(lines4[pos5]))
             pos5 += 1
+
     
 label.close()
 temporal.close()
