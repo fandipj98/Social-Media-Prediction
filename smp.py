@@ -76,6 +76,8 @@ while True:
             #print(',\n')
             newFile.write(',')
             break
+        # else if lines2[index4]==',':
+        #     newFile.write(' ')
         else :
             #print(str(lines2[index2]))
             newFile.write(str(lines2[index4]))
