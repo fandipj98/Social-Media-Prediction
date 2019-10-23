@@ -1,10 +1,33 @@
-import time
+output = open("listSubcategory.txt", "r")
 
+myMap = dict()
+counter = 0
+
+fileText = output.readline().replace('\n', '')
+
+while fileText:
+    
+    counter += 1
+    myMap[fileText] = counter
+    fileText = output.readline().replace('\n', '')
+
+output.close()
+
+oneHotTemplate = []
+
+for x in range (77):
+    oneHotTemplate.append('0')
+# x = "".join(oneHotTemplate)
+# print(x)
+    
 newFile = open("data.csv","a")
 tag = open("train_tags.json", "r")
 category = open("train_category.json", "r")
 temporal = open("train_temporalspatial.json", "r")
 label = open("train_label.txt", "r")
+
+myList = []
+counterList = 0
 
 lines = tag.read()
 pos = -1
@@ -14,6 +37,7 @@ lines2 = category.read()
 pos2 = -1
 pos3 = -1
 pos4 = -1
+temp = ''
 
 lines3 = temporal.read()
 pos_postdate = -1
@@ -78,13 +102,27 @@ while True:
         #print (lines3[index3])
         if lines2[index4]=='"':
             #print(',\n')
-            newFile.write(',')
+            oneHotTemplate[myMap[temp]-1] = '1'
+            newFile.write("".join(oneHotTemplate) + ',')
+            oneHotTemplate[myMap[temp]-1] = '0'
+            temp = ''
+
+            while counterList > 0:
+                oneHotTemplate[myList[counterList - 1]] = '0'
+                myList.pop()
+                counterList -= 1
+
             break
-        # else if lines2[index4]==',':
-        #     newFile.write(' ')
+        elif lines2[index4]==',':
+            # print(myMap[temp])
+            oneHotTemplate[myMap[temp]-1] = '1'
+            myList.append(myMap[temp]-1)
+            temp = ''
+            counterList += 1
+            index4 += 1
         else :
             #print(str(lines2[index2]))
-            newFile.write(str(lines2[index4]))
+            temp = temp + str(lines2[index4])
             index4 += 1
 
     
@@ -96,19 +134,19 @@ while True:
         #print (lines3[index3])
         if lines3[index_postdate]=='"':
             #print(',\n')
-            # newFile.write(',\n')
+            newFile.write(',')
             break
         else :
             #print(str(lines2[index2]))
             my_second=my_second*10+int(lines3[index_postdate])
+            newFile.write(str(lines3[index_postdate]))
             index_postdate +=1
-            # newFile.write(str(lines3[index_postdate]))
             # lines3[index_postdate]
 
     #print(my_second)
-    timeArray = time.localtime(my_second)
-    datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
-    newFile.write(str(datetime) + ',')
+    # timeArray = time.localtime(my_second)
+    # datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
+    # newFile.write(str(datetime) + ',')
 
     
     while True:
