@@ -1,5 +1,5 @@
 getList = open("train_category.json","r")
-output = open("listSubcategory.txt", "a")
+output = open("listCategory.txt", "a")
 
 listSubcategory = set()
 textList = set()
@@ -13,9 +13,9 @@ text = ''
 
 while True:
         
-    pos4 = lines.find('Subcategory', pos4+1)
-    check = lines.find('Subcategory', pos4+1)
-    index = pos4+15
+    pos4 = lines.find('Category', pos4+1)
+    check = lines.find('Category', pos4+1)
+    index = pos4+12
 
     if check == -1:
         break
