@@ -60,13 +60,14 @@ def main():
     AtestData = np.array(testSet)
     aTestDataGet = AtestData[:,0:3].astype(float)
     print(aTestDataGet)
+    print('\n')
 
     # create a regressor object 
     regressor = DecisionTreeRegressor(random_state = 0)  
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    # print(y_pred)
+    print(y_pred)
     # print("Predicted price: %d \n"% y_pred)
 
 
