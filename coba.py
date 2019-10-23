@@ -1,5 +1,16 @@
-text = ''
+output = open("listSubcategory.txt", "r")
 
-text = text + 'a' + 'b'
+myMap = dict()
+index = 0
 
-print(text)
+fileText = output.readline().replace('\n', '')
+
+while fileText:
+    # print(str(index) + ' ' + fileText)
+    index += 1
+    myMap[fileText] = index
+    fileText = output.readline().replace('\n', '')
+
+# print(myMap["Good"])
+
+output.close()
