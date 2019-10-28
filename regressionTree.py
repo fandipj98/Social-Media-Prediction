@@ -13,11 +13,17 @@ def loadDataset(filename, split, trainingSet=[] , testSet=[]):
 	with open(filename, 'r') as csvfile:
 	    lines = csv.reader(csvfile)
 	    dataset = list(lines)
-	    for x in range(500):
+	    for x in range(1500):
 	        if random.random() < split:
 	            trainingSet.append(dataset[x])
 	        else:
 	            testSet.append(dataset[x])
+
+def getMSE(testSet, predictions):
+	nilai = 0.0
+	for x in range(len(testSet)):
+		nilai += pow((float(testSet[x][-1]) - float(predictions[x])), 2)
+	return nilai/float(len(testSet))
 
 # def regressionTreeFunc():
     # A = dataset.iloc[:, 0:5]    
@@ -59,15 +65,18 @@ def main():
 
     AtestData = np.array(testSet)
     aTestDataGet = AtestData[:,0:3].astype(float)
-    print(aTestDataGet)
-    print('\n')
+    # print(aTestDataGet)
+    # print('\n')
 
     # create a regressor object 
     regressor = DecisionTreeRegressor(random_state = 0)  
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    print(y_pred)
+    # print(y_pred)
+
+    mse = getMSE(testSet, y_pred)
+    print('MSE: ' + repr(mse))
     # print("Predicted price: %d \n"% y_pred)
 
 

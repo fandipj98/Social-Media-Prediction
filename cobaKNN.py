@@ -7,7 +7,7 @@ def loadDataset(filename, split, trainingSet=[] , testSet=[]):
 	with open(filename, 'r') as csvfile:
 	    lines = csv.reader(csvfile)
 	    dataset = list(lines)
-	    for x in range(500):
+	    for x in range(1500):
 	        if random.random() < split:
 	            trainingSet.append(dataset[x])
 	        else:
@@ -71,8 +71,8 @@ def main():
 	print ('Test set: ' + repr(len(testSet)))
 	# generate predictions
 	predictions=[]
-	k = int(math.sqrt(len(trainingSet)))
-	print (k)
+	k = int(math.sqrt(len(testSet)))
+	print ('Nilai K: ' + repr(k))
 	for x in range(len(testSet)):
 		neighbors = getNeighbors(trainingSet, testSet[x], k)
 		result = getResponse(neighbors, k)
