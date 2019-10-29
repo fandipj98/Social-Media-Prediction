@@ -1,5 +1,5 @@
 import csv
-output = open("listSubcategory.txt", "r")
+output = open("listCategory.txt", "r")
 
 myMap = dict()
 counter = 0
@@ -48,7 +48,7 @@ while True:
                 count += 1
             pos += 1
 
-            if count==11 or count==19 or count==47:
+            if count==47:
                 if lines[pos]=='"':
                     count += 1
                     pos += 1
@@ -56,35 +56,43 @@ while True:
                     newFile.write(str(lines[pos]))
                     # print(lines[pos] + str(count) + '\n')
             
-            if count==12 or count==20:
-                newFile.write(',')
-            # subcategory
-            elif count==15:
+            if count==11:
                 if lines[pos]=='"':
                     count += 1
                     pos += 1
                 else:
-                    if lines[pos]==',':
-                        # print(myMap[temp])
-                        oneHotTemplate[myMap[temp]-1] = '1'
-                        myList.append(myMap[temp]-1)
-                        temp = ''
-                        counterList += 1
-                    else :
-                        #print(str(lines2[index2]))
-                        temp = temp + str(lines[pos])
-            
-            if count==16:
-                #print(',\n')
-                oneHotTemplate[myMap[temp]-1] = '1'
-                newFile.write("".join(oneHotTemplate) + ',')
-                oneHotTemplate[myMap[temp]-1] = '0'
-                temp = ''
+                    temp = temp + lines[pos]
 
-                while counterList > 0:
-                    oneHotTemplate[myList[counterList - 1]] = '0'
-                    myList.pop()
-                    counterList -= 1
+            if count==12:
+                newFile.write( str(myMap[temp]) + ',')
+                temp = ''
+            # subcategory
+            # elif count==15:
+            #     if lines[pos]=='"':
+            #         count += 1
+            #         pos += 1
+            #     else:
+            #         if lines[pos]==',':
+            #             # print(myMap[temp])
+            #             oneHotTemplate[myMap[temp]-1] = '1'
+            #             myList.append(myMap[temp]-1)
+            #             temp = ''
+            #             counterList += 1
+            #         else :
+            #             #print(str(lines2[index2]))
+            #             temp = temp + str(lines[pos])
+            
+            # if count==16:
+            #     #print(',\n')
+            #     oneHotTemplate[myMap[temp]-1] = '1'
+            #     newFile.write("".join(oneHotTemplate) + ',')
+            #     oneHotTemplate[myMap[temp]-1] = '0'
+            #     temp = ''
+
+            #     while counterList > 0:
+            #         oneHotTemplate[myList[counterList - 1]] = '0'
+            #         myList.pop()
+            #         counterList -= 1
             
             #jumlah alltags
             elif count==43:
