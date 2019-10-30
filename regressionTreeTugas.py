@@ -33,6 +33,8 @@ def main():
     split = 0.67
     loadDataset('data_rt.csv', 'data_tugas_rt.csv', split, trainingSet, testSet)
 
+    newFile = open("17-041_17-053_17-056_RegressionTree.csv","a")
+
     AtrainData = np.array(trainingSet)
     # print(AtrainData)
 
@@ -55,9 +57,11 @@ def main():
     print(y_pred)
     rate = 0.0
     for x in range(len(y_pred)):
+        newFile.write(str(y_pred[x]) + '\n')
         rate += y_pred[x]
     rate /= len(y_pred)
     print (rate)
+    newFile.close()
 
     # mse = getMSE(testSet, y_pred)
     # print('MSE: ' + repr(mse))
