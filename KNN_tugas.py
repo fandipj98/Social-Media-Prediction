@@ -7,7 +7,7 @@ def loadDataset(filename, filenameTest, split, trainingSet=[] , testSet=[]):
     with open(filename, 'r') as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
-        for x in range(150):
+        for x in range(1500):
             trainingSet.append(dataset[x])
     with open(filenameTest, 'r') as csvfileTest:
 	    linesTest = csv.reader(csvfileTest)
@@ -16,15 +16,17 @@ def loadDataset(filename, filenameTest, split, trainingSet=[] , testSet=[]):
 	        testSet.append(datasetTest[x])
 
 def euclideanDistance(instance1, instance2, x, y):
-	distance = 0
-	distance += pow((float(instance1[x]) - float(instance2[y])), 2)
-	return math.sqrt(distance)
+    # print (instance1[x] + ' ' + instance2[y])
+    distance = 0
+    distance += pow((float(instance1[x]) - float(instance2[y])), 2)
+    return math.sqrt(distance)
 
 def hammingDistance(instance1, instance2, x, y):
-	distance = 0
-	if instance1[x] != instance2[y]:
-		distance = 1
-	return distance
+    # print (instance1[x] + ' ' + instance2[y])
+    distance = 0
+    if instance1[x] != instance2[y]:
+    	distance = 1
+    return distance
 
 def getNeighbors(trainingSet, testInstance, k):
     distances = []
@@ -34,8 +36,8 @@ def getNeighbors(trainingSet, testInstance, k):
         dist += float(hammingDistance(testInstance, trainingSet[x], 1, 3))
         dist += float(hammingDistance(testInstance, trainingSet[x], 2, 2))
         dist += euclideanDistance(testInstance, trainingSet[x], 3, 0)
-        dist += euclideanDistance(testInstance, trainingSet[x], 4, 4)
-        print (dist)
+        # dist += euclideanDistance(testInstance, trainingSet[x], 4, 4)
+        # print (dist)
         distances.append((trainingSet[x], dist))
     # print (distances[0][0])
     distances.sort(key=operator.itemgetter(1))
