@@ -7,7 +7,7 @@ def loadDataset(filename, split, trainingSet=[] , testSet=[]):
 	with open(filename, 'r') as csvfile:
 	    lines = csv.reader(csvfile)
 	    dataset = list(lines)
-	    for x in range(1500):
+	    for x in range(204):
 	        if random.random() < split:
 	            trainingSet.append(dataset[x])
 	        else:
@@ -31,7 +31,7 @@ def getNeighbors(trainingSet, testInstance, k):
 		dist += hammingDistance(testInstance, trainingSet[x], 1)
 		dist += hammingDistance(testInstance, trainingSet[x], 2)
 		dist += hammingDistance(testInstance, trainingSet[x], 3)
-		dist += euclideanDistance(testInstance, trainingSet[x], 4)
+		dist += euclideanDistance(testInstance, trainingSet[x], 4)/10000000
 		distances.append((trainingSet[x], dist))
 
 	distances.sort(key=operator.itemgetter(1))
@@ -65,19 +65,23 @@ def main():
 	# prepare data
 	trainingSet=[]
 	testSet=[]
-	split = 0.67
+	split = 0.75
 	loadDataset('data.csv', split, trainingSet, testSet)
 	print ('Train set: ' + repr(len(trainingSet)))
 	print ('Test set: ' + repr(len(testSet)))
 	# generate predictions
 	predictions=[]
+	rate = 0.0
 	k = int(math.sqrt(len(testSet)))
 	print ('Nilai K: ' + repr(k))
 	for x in range(len(testSet)):
 		neighbors = getNeighbors(trainingSet, testSet[x], k)
 		result = getResponse(neighbors, k)
 		predictions.append(result)
-		# print('> predicted=' + repr(result) + ', actual=' + repr(testSet[x][-1]))
+		print('> predicted=' + repr(result))
+		rate += result
+	rate /= len(testSet)
+	print (rate)
 	mse = getMSE(testSet, predictions)
 	print('MSE: ' + repr(mse))
 	# print('Accuracy: ' + repr(accuracy))
