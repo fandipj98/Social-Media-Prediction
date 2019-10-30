@@ -13,7 +13,7 @@ def loadDataset(filename, split, trainingSet=[] , testSet=[]):
 	with open(filename, 'r') as csvfile:
 	    lines = csv.reader(csvfile)
 	    dataset = list(lines)
-	    for x in range(1500):
+	    for x in range(204):
 	        if random.random() < split:
 	            trainingSet.append(dataset[x])
 	        else:
@@ -28,7 +28,7 @@ def getMSE(testSet, predictions):
 def main():
     trainingSet=[]
     testSet=[]
-    split = 0.67
+    split = 0.75
     loadDataset('data_rt.csv', split, trainingSet, testSet)
 
     AtrainData = np.array(trainingSet)
@@ -51,9 +51,14 @@ def main():
 
     y_pred = regressor.predict(aTestDataGet)
     print(y_pred)
+    rate = 0.0
+    for x in range(len(y_pred)):
+        rate += y_pred[x]
+    rate /= len(y_pred)
+    print (rate)
 
-    # mse = getMSE(testSet, y_pred)
-    # print('MSE: ' + repr(mse))
+    mse = getMSE(testSet, y_pred)
+    print('MSE: ' + repr(mse))
     # print("Predicted price: %d \n"% y_pred)
 
 

@@ -13,7 +13,7 @@ def loadDataset(filename, filenameTest, split, trainingSet=[] , testSet=[]):
     with open(filename, 'r') as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
-        for x in range(150):
+        for x in range(1500):
             trainingSet.append(dataset[x])
     with open(filenameTest, 'r') as csvfileTest:
 	    linesTest = csv.reader(csvfileTest)
@@ -53,6 +53,11 @@ def main():
 
     y_pred = regressor.predict(aTestDataGet)
     print(y_pred)
+    rate = 0.0
+    for x in range(len(y_pred)):
+        rate += y_pred[x]
+    rate /= len(y_pred)
+    print (rate)
 
     # mse = getMSE(testSet, y_pred)
     # print('MSE: ' + repr(mse))
