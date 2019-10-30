@@ -7,7 +7,7 @@ def loadDataset(filename, split, trainingSet=[] , testSet=[]):
 	with open(filename, 'r') as csvfile:
 	    lines = csv.reader(csvfile)
 	    dataset = list(lines)
-	    for x in range(204):
+	    for x in range(170):
 	        if random.random() < split:
 	            trainingSet.append(dataset[x])
 	        else:
@@ -65,7 +65,7 @@ def main():
 	# prepare data
 	trainingSet=[]
 	testSet=[]
-	split = 0.75
+	split = 0.7
 	loadDataset('data.csv', split, trainingSet, testSet)
 	print ('Train set: ' + repr(len(trainingSet)))
 	print ('Test set: ' + repr(len(testSet)))
