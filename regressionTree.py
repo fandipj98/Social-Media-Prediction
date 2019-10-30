@@ -25,29 +25,6 @@ def getMSE(testSet, predictions):
 		nilai += pow((float(testSet[x][-1]) - float(predictions[x])), 2)
 	return nilai/float(len(testSet))
 
-# def regressionTreeFunc():
-    # A = dataset.iloc[:, 0:5]    
-    # # print X 
-    # print(A)  
-
-    # F = dataset.iloc[:, 5]    
-    # # print Y 
-    # # print(Y) 
-
-    # from sklearn.tree import DecisionTreeRegressor  
-    
-    # # create a regressor object 
-    # regressor = DecisionTreeRegressor(random_state = 0)  
-    
-    # # fit the regressor with X and Y data 
-    # regressor.fit(X, Y) 
-
-    # y_pred = regressor.predict() 
-    
-    # # print the predicted price 
-    # print("Predicted price: % d\n"% y_pred) 
-
-
 def main():
     trainingSet=[]
     testSet=[]
@@ -73,10 +50,10 @@ def main():
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    # print(y_pred)
+    print(y_pred)
 
-    mse = getMSE(testSet, y_pred)
-    print('MSE: ' + repr(mse))
+    # mse = getMSE(testSet, y_pred)
+    # print('MSE: ' + repr(mse))
     # print("Predicted price: %d \n"% y_pred)
 
 

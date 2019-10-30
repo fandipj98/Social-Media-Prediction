@@ -148,7 +148,6 @@ while True:
     # timeArray = time.localtime(my_second)
     # datetime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
     # newFile.write(str(datetime) + ',')
-
     
     while True:
         if lines4[pos5]=='\n':
