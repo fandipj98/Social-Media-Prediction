@@ -54,13 +54,13 @@ def main():
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    print(y_pred)
+    # print(y_pred)
     rate = 0.0
     for x in range(len(y_pred)):
         newFile.write(str(y_pred[x]) + '\n')
         rate += y_pred[x]
     rate /= len(y_pred)
-    print (rate)
+    # print (rate)
     newFile.close()
 
     # mse = getMSE(testSet, y_pred)
