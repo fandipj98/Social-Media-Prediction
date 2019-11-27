@@ -11,7 +11,7 @@ trainingSet=[]
 with open('data_km.csv','r') as csvfile:
     lines = csv.reader(csvfile)
     dataset = list(lines)
-    for x in range(5000):
+    for x in range(1000):
         trainingSet.append(dataset[x])
 with open('data_tugas_km.csv', 'r') as csvfileTest:
     linesTest = csv.reader(csvfileTest)
@@ -46,22 +46,37 @@ labels = af.labels_
 n_clusters_ = len(cluster_centers_indices)
 
 
-plt.close('all')
-plt.figure(1)
-plt.clf()
+# plt.close('all')
+# plt.figure(1)
+# plt.clf()
 
+cluster_center = []
 colors = cycle('bgrcmykbgrcmykbgrcmykbgrcmyk')
 for k, col in zip(range(n_clusters_), colors):
     class_members = labels == k
-    cluster_center = cscGet[cluster_centers_indices[k]]
-
-    plt.plot(cscGet[class_members, 0], cscGet[class_members, 1], col + '.')
-    plt.plot(cluster_center[0], cluster_center[1], 'o',markerfacecolor=col,
-             markeredgecolor='k', markersize=14)
+    cluster_center.append(cscGet[cluster_centers_indices[k]])
     
-    for x in cscGet[class_members]:
-        plt.plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], col)
+centroid = np.array(cluster_center)
 
-plt.title('Estimated number of clusters: %d' % n_clusters_)
-plt.show()
+closest_centroid = []
+for x in range(len(testDataGet)):
+    diff = centroid - testDataGet[x,:]
+    # print(diff)
+    dist = np.sqrt(np.sum(diff**2, axis=-1))
+    # print(dist)
+    closest_centroid.append(centroid[np.argmin(dist),])
+    # print(centroid)
+
+for x in range(len(closest_centroid)):
+    print (closest_centroid[x])
+
+#     plt.plot(cscGet[class_members, 0], cscGet[class_members, 1], col + '.')
+#     plt.plot(cluster_center[0], cluster_center[1], 'o',markerfacecolor=col,
+#              markeredgecolor='k', markersize=14)
+    
+#     for x in cscGet[class_members]:
+#         plt.plot([cluster_center[0], x[0]], [cluster_center[1], x[1]], col)
+
+# plt.title('Estimated number of clusters: %d' % n_clusters_)
+# plt.show()
 

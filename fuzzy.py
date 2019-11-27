@@ -10,7 +10,7 @@ trainingSet=[]
 with open('data_km.csv','r') as csvfile:
     lines = csv.reader(csvfile)
     dataset = list(lines)
-    for x in range(len(dataset)):
+    for x in range(10000):
         trainingSet.append(dataset[x])
 with open('data_tugas_km.csv', 'r') as csvfileTest:
     linesTest = csv.reader(csvfileTest)
