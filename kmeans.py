@@ -10,7 +10,7 @@ trainingSet=[]
 with open('data_km.csv','r') as csvfile:
     lines = csv.reader(csvfile)
     dataset = list(lines)
-    for x in range(1000):
+    for x in range(len(dataset)):
         trainingSet.append(dataset[x])
 with open('data_tugas_km.csv', 'r') as csvfileTest:
     linesTest = csv.reader(csvfileTest)
@@ -61,20 +61,20 @@ diff = centroid - testDataGet[0,:]
 dist = np.sqrt(np.sum(diff**2, axis=-1))
 # print(dist)
 closest_centroid = centroid[np.argmin(dist),]
-print(centroid)
-print(closest_centroid)
+# print(centroid)
+# print(closest_centroid)
 
 # Cari Center
-# wcss = []
-# for i in range(1, 11):
-#     kmeans = KMeans(n_clusters=i, init='k-means++', max_iter=1000, n_init=10, random_state=0)
-#     kmeans.fit(categoryGet)
-#     wcss.append(kmeans.inertia_)
-# plt.plot(range(1, 11), wcss)
-# plt.title('Elbow Method')
-# plt.xlabel('Number of clusters')
-# plt.ylabel('WCSS')
-# plt.show()
+wcss = []
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters=i, init='k-means++', max_iter=1000, n_init=10, random_state=0)
+    kmeans.fit(cscGet)
+    wcss.append(kmeans.inertia_)
+plt.plot(range(1, 11), wcss)
+plt.title('Elbow Method')
+plt.xlabel('Number of clusters')
+plt.ylabel('WCSS')
+plt.show()
 
 # kmeans = KMeans(n_clusters=4, init='k-means++', max_iter=300, n_init=10, random_state=0)
 # pred_y = kmeans.fit_predict(categoryGet)
