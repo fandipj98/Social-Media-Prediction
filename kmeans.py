@@ -46,14 +46,19 @@ testDataGet = testData[:,0:2].astype(float)
 # plt.show()
 
 kmeans = KMeans(n_clusters=3).fit(cscGet)
-centroid = kmeans.cluster_centers_
-# print(centroids)
 
-plt.scatter(cscGet[:,0], cscGet[:,1])
-plt.scatter(centroid[:,0], centroid[:,1], marker='*', c='g', s=150)
+centroid = kmeans.cluster_centers_
+print(centroid)
+
+# TRAIN DATA
+# plt.scatter(cscGet[:,0], cscGet[:,1])
+# plt.scatter(centroid[:,0], centroid[:,1], marker='*', c='g', s=150)
 # plt.show()
 
 # predict(testDataGet, centroid)
+
+test = kmeans.predict(testDataGet)
+print(test)
 
 closest_centroid = []
 for x in range(len(testDataGet)):
@@ -66,6 +71,10 @@ for x in range(len(testDataGet)):
 
 for x in range(len(closest_centroid)):
     print (closest_centroid[x])
+
+plt.scatter(testDataGet[:,0], testDataGet[:,1])
+plt.scatter(centroid[:,0], centroid[:,1], marker='*', c='g', s=150)
+plt.show()
 
 # Cari Center
 # wcss = []
@@ -82,6 +91,4 @@ for x in range(len(closest_centroid)):
 # kmeans = KMeans(n_clusters=4, init='k-means++', max_iter=300, n_init=10, random_state=0)
 # pred_y = kmeans.fit_predict(categoryGet)
 # print(pred_y)
-
-
 

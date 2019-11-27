@@ -55,7 +55,8 @@ for x in range(len(testDataGet)):
     dist = np.sqrt(np.sum(diff**2, axis=-1))
     # print(dist)
     closest_centroid.append(fcm_centers[np.argmin(dist),])
-    # print(fcm_centers)
+
+print(fcm_centers)
 
 for x in range(len(closest_centroid)):
     print (closest_centroid[x])
