@@ -13,12 +13,12 @@ def loadDataset(filename, split, trainingSet=[] , testSet=[]):
     with open(filename, 'r') as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
-        for x in range(6000):
+        for x in range(2000):
             set1.append(dataset[x])
-            set2.append(dataset[x+6000])
-            set3.append(dataset[x+12000])
-            set4.append(dataset[x+18000])
-            set5.append(dataset[x+24000])
+            set2.append(dataset[x+2000])
+            set3.append(dataset[x+4000])
+            set4.append(dataset[x+6000])
+            set5.append(dataset[x+8000])
 
 def euclideanDistance(instance1, instance2, x):
 	distance = 0
@@ -65,7 +65,7 @@ def getAccuracy(testSet, predictions):
 def getMSE(testSet, predictions):
 	nilai = 0.0
 	for x in range(len(testSet)):
-		nilai += pow((float(testSet[x]) - float(predictions[x])), 2)
+		nilai += pow((float(testSet[x][-1]) - float(predictions[x])), 2)
 	return nilai/float(len(testSet))
 	
 def main():
@@ -80,7 +80,7 @@ def main():
     print ('set4: ' + repr(len(set4)))
     print ('set5: ' + repr(len(set5)))
 
-    for x in range(6000):
+    for x in range(2000):
         testSet.append(set1[x])
         trainingSet.append(set2[x])
         trainingSet.append(set3[x])
