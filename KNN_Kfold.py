@@ -9,7 +9,7 @@ set3 = []
 set4 = []
 set5 = []
 
-def loadDataset(filename, split, trainingSet=[] , testSet=[]):
+def loadDataset(filename):
     with open(filename, 'r') as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
@@ -72,8 +72,7 @@ def main():
 	# prepare data
     trainingSet=[]
     testSet=[]
-    split = 0.67
-    loadDataset('data_random.csv', split, trainingSet, testSet)
+    loadDataset('data_random.csv')
     print ('Jumlah Data Set 1: ' + repr(len(set1)))
     print ('Jumlah Data Set 2: ' + repr(len(set2)))
     print ('Jumlah Data Set 3: ' + repr(len(set3)))
