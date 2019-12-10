@@ -32,7 +32,7 @@ def getMSE(testSet, predictions):
 	return nilai/float(len(testSet))
 
 def main():
-    loadDataset('data_rt.csv')
+    loadDataset('data_rt_random.csv')
     
     trainingSet=[]
     testSet=[]

@@ -3,7 +3,7 @@ import numpy as np
 
 trainingSet=[]
 
-with open('data.csv','r') as csvfile:
+with open('data_rt_kfold.csv','r') as csvfile:
     lines = csv.reader(csvfile)
     dataset = list(lines)
     for x in range(len(dataset)):
@@ -13,7 +13,7 @@ trainData = np.array(trainingSet)
 # print(trainData)
 np.random.shuffle(trainData)
 
-newFile = open("data_random.csv", "a")
+newFile = open("data_rt_random.csv", "a")
 
 maks_count = 0
 for x in trainData:
@@ -22,7 +22,7 @@ for x in trainData:
     count = 0
     for y in x:
         count += 1
-        if count < 6:
+        if count < 4:
             newFile.write(y + ',')
         else:
             newFile.write(y)
