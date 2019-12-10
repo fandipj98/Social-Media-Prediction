@@ -69,6 +69,7 @@ def main():
 	loadDataset('data.csv', split, trainingSet, testSet)
 	print ('Train set: ' + repr(len(trainingSet)))
 	print ('Test set: ' + repr(len(testSet)))
+	
 	# generate predictions
 	predictions=[]
 	rate = 0.0
