@@ -74,12 +74,13 @@ def main():
     testSet=[]
     split = 0.67
     loadDataset('data_random.csv', split, trainingSet, testSet)
-    print ('set1: ' + repr(len(set1)))
-    print ('set2: ' + repr(len(set2)))
-    print ('set3: ' + repr(len(set3)))
-    print ('set4: ' + repr(len(set4)))
-    print ('set5: ' + repr(len(set5)))
+    print ('Jumlah Data Set1: ' + repr(len(set1)))
+    print ('Jumlah Data Set2: ' + repr(len(set2)))
+    print ('Jumlah Data Set3: ' + repr(len(set3)))
+    print ('Jumlah Data Set4: ' + repr(len(set4)))
+    print ('Jumlah Data Set5: ' + repr(len(set5)))
 
+    #set 1 become tes set
     for x in range(2000):
         testSet.append(set1[x])
         trainingSet.append(set2[x])
@@ -87,12 +88,11 @@ def main():
         trainingSet.append(set4[x])
         trainingSet.append(set5[x])
 
-    print ('Train set: ' + repr(len(trainingSet)))
-    print ('Test set: ' + repr(len(testSet)))
+    print ('Jumlah Train set: ' + repr(len(trainingSet)))
+    print ('Jumlah Test set: ' + repr(len(testSet)))
 
     # generate predictions
     predictions=[]
-    rate = 0.0
     # k = int(math.sqrt(len(trainingSet)))
     k = 9
     print ('Nilai K: ' + repr(k))
@@ -103,15 +103,88 @@ def main():
         result = getResponse(neighbors, k)
         predictions.append(result)
         # print('> predicted=' + repr(result))
-        rate += result
-    rate /= len(testSet)
-    print (rate)
-    # cobaSet = [6.51,8.63,11.17,15.15,8.67,11.17,11.17,16.3,15.15,15.15,8.67,15.15,15.15,15.15,15.15,15.15,15.15,15.15,6.51,6.51,15.15,6.51,6.31,8.63,16.3,16.3,9.025,15.15,15.15,8.63,15.15,15.15,8.63,8.63,11.17,15.15,11.17,15.15,8.63,6.31,11.17,6.51,6.51,8.63,15.15,8.63,16.3,8.67,8.67,8.63,15.15]
-    # cobaSet = [6.94,11.17,11.17,13.7,11.17,11.17,11.17,16.3,13.7,13.7,11.17,13.7,13.7,13.7,13.7,13.7,13.7,13.7,6.51,6.51,13.7,6.51,11.17,11.17,16.3,16.3,5.32,13.7,13.7,11.17,13.7,13.7,11.17,11.17,11.17,13.7,11.17,13.7,11.17,12.74,11.17,6.51,6.51,8.63,13.7,11.17,16.3,11.17,11.17,8.63,13.7]
-    cobaSet = [6.94,11.17,11.17,10.7,11.17,11.17,11.17,16.3,8.485,8.485,11.17,10.7,10.7,8.485,10.7,8.485,10.7,10.7,6.51,6.51,10.7,6.51,11.17,11.17,5.88,5.88,8.18,10.7,10.63,11.17,10.63,8.485,11.17,11.17,11.17,10.7,11.17,10.7,11.17,7.78,11.17,6.51,6.51,7.78,10.7,11.17,10.3,11.17,11.17,7.78,8.485]
-    # cobaSet = [6.94,11.17,11.17,13.7,11.17,11.17,11.17,16.3,13.7,13.7,11.17,13.7,13.7,13.7,13.7,13.7,13.7,13.7,6.51,6.51,13.7,6.51,11.17,11.17,16.3,16.3,5.32,13.7,13.7,11.17,13.7,13.7,11.17,11.17,11.17,13.7,11.17,13.7,11.17,12.74,11.17,6.51,6.51,8.63,13.7,11.17,16.3,11.17,11.17,8.63,13.7]
     mse = getMSE(testSet, predictions)
-    print('MSE: ' + repr(mse))
+    print('MSE Set 1: ' + repr(mse))
 	# print('Accuracy: ' + repr(accuracy))
-	
+
+    # set 2 become tes set
+    trainingSet=[]
+    testSet=[]
+    predictions=[]
+    for x in range(2000):
+        testSet.append(set2[x])
+        trainingSet.append(set1[x])
+        trainingSet.append(set3[x])
+        trainingSet.append(set4[x])
+        trainingSet.append(set5[x])
+    
+    for x in range(len(testSet)):
+        # print(testSet[x])
+        neighbors = getNeighbors(trainingSet, testSet[x], k)
+        result = getResponse(neighbors, k)
+        predictions.append(result)
+        # print('> predicted=' + repr(result))
+    mse = getMSE(testSet, predictions)
+    print('MSE Set 2: ' + repr(mse))
+
+    # set 3 become tes set
+    trainingSet=[]
+    testSet=[]
+    predictions=[]
+    for x in range(2000):
+        testSet.append(set3[x])
+        trainingSet.append(set1[x])
+        trainingSet.append(set2[x])
+        trainingSet.append(set4[x])
+        trainingSet.append(set5[x])
+    
+    for x in range(len(testSet)):
+        # print(testSet[x])
+        neighbors = getNeighbors(trainingSet, testSet[x], k)
+        result = getResponse(neighbors, k)
+        predictions.append(result)
+        # print('> predicted=' + repr(result))
+    mse = getMSE(testSet, predictions)
+    print('MSE Set 3: ' + repr(mse))
+
+    # set 4 become tes set
+    trainingSet=[]
+    testSet=[]
+    predictions=[]
+    for x in range(2000):
+        testSet.append(set4[x])
+        trainingSet.append(set1[x])
+        trainingSet.append(set2[x])
+        trainingSet.append(set3[x])
+        trainingSet.append(set5[x])
+    
+    for x in range(len(testSet)):
+        # print(testSet[x])
+        neighbors = getNeighbors(trainingSet, testSet[x], k)
+        result = getResponse(neighbors, k)
+        predictions.append(result)
+        # print('> predicted=' + repr(result))
+    mse = getMSE(testSet, predictions)
+    print('MSE Set 4: ' + repr(mse))
+
+    # set 5 become tes set
+    trainingSet=[]
+    testSet=[]
+    predictions=[]
+    for x in range(2000):
+        testSet.append(set5[x])
+        trainingSet.append(set1[x])
+        trainingSet.append(set2[x])
+        trainingSet.append(set3[x])
+        trainingSet.append(set4[x])
+    
+    for x in range(len(testSet)):
+        # print(testSet[x])
+        neighbors = getNeighbors(trainingSet, testSet[x], k)
+        result = getResponse(neighbors, k)
+        predictions.append(result)
+        # print('> predicted=' + repr(result))
+    mse = getMSE(testSet, predictions)
+    print('MSE Set 5: ' + repr(mse))
+
 main()
