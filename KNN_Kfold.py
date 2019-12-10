@@ -74,11 +74,11 @@ def main():
     testSet=[]
     split = 0.67
     loadDataset('data_random.csv', split, trainingSet, testSet)
-    print ('Jumlah Data Set1: ' + repr(len(set1)))
-    print ('Jumlah Data Set2: ' + repr(len(set2)))
-    print ('Jumlah Data Set3: ' + repr(len(set3)))
-    print ('Jumlah Data Set4: ' + repr(len(set4)))
-    print ('Jumlah Data Set5: ' + repr(len(set5)))
+    print ('Jumlah Data Set 1: ' + repr(len(set1)))
+    print ('Jumlah Data Set 2: ' + repr(len(set2)))
+    print ('Jumlah Data Set 3: ' + repr(len(set3)))
+    print ('Jumlah Data Set 4: ' + repr(len(set4)))
+    print ('Jumlah Data Set 5: ' + repr(len(set5)))
 
     #set 1 become tes set
     for x in range(2000):
@@ -93,8 +93,8 @@ def main():
 
     # generate predictions
     predictions=[]
-    # k = int(math.sqrt(len(trainingSet)))
-    k = 9
+    k = int(math.sqrt(len(trainingSet)))
+    # k = 9
     print ('Nilai K: ' + repr(k))
         
     for x in range(len(testSet)):
