@@ -5,6 +5,11 @@ import csv
 from sklearn.svm import SVC
 from sklearn                        import metrics, svm
 
+# import warnings filter
+from warnings import simplefilter
+# ignore all future warnings
+simplefilter(action='ignore', category=FutureWarning)
+
 # from sklearn.model_selection import train_test_split
 # %matplotlib inline
 
