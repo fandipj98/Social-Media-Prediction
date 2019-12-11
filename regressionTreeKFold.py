@@ -33,7 +33,8 @@ def getMSE(testSet, predictions):
 
 def main():
     loadDataset('data_rt_random.csv')
-    
+    totalMSE = 0.0
+
     trainingSet=[]
     testSet=[]
     y_pred = []
@@ -65,10 +66,11 @@ def main():
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    print(y_pred)
+    # print(y_pred)
 
     mse = getMSE(testSet, y_pred)
     print('MSE Set 1: ' + repr(mse))
+    totalMSE += mse
 
     trainingSet=[]
     testSet=[]
@@ -101,10 +103,11 @@ def main():
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    print(y_pred)
+    # print(y_pred)
 
     mse = getMSE(testSet, y_pred)
     print('MSE Set 2: ' + repr(mse))
+    totalMSE += mse
 
     trainingSet=[]
     testSet=[]
@@ -137,10 +140,11 @@ def main():
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    print(y_pred)
+    # print(y_pred)
 
     mse = getMSE(testSet, y_pred)
     print('MSE Set 3: ' + repr(mse))
+    totalMSE += mse
 
     trainingSet=[]
     testSet=[]
@@ -173,10 +177,11 @@ def main():
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    print(y_pred)
+    # print(y_pred)
 
     mse = getMSE(testSet, y_pred)
     print('MSE Set 4: ' + repr(mse))
+    totalMSE += mse
 
     trainingSet=[]
     testSet=[]
@@ -209,13 +214,14 @@ def main():
     regressor.fit(aTrainDataGet, bTrainDataGet)
 
     y_pred = regressor.predict(aTestDataGet)
-    print(y_pred)
+    # print(y_pred)
 
     mse = getMSE(testSet, y_pred)
     print('MSE Set 5: ' + repr(mse))
+    totalMSE += mse
 
-
-
+    totalMSE = totalMSE / 5
+    print('Average MSE: ' + repr(totalMSE))
    
 
 main()

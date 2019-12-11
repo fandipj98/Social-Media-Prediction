@@ -35,10 +35,8 @@ def getNeighbors(trainingSet, testInstance, k):
 	distances = []
 	for x in range(len(trainingSet)):
 		dist = euclideanDistance(testInstance, trainingSet[x], 0)
-		dist += hammingDistance(testInstance, trainingSet[x], 1)
-		dist += hammingDistance(testInstance, trainingSet[x], 2)
-		dist += hammingDistance(testInstance, trainingSet[x], 3)
-		dist += euclideanDistance(testInstance, trainingSet[x], 4)/10000000
+		dist += euclideanDistance(testInstance, trainingSet[x], 1)
+		dist += euclideanDistance(testInstance, trainingSet[x], 2)
 		distances.append((trainingSet[x], dist))
 
 	distances.sort(key=operator.itemgetter(1))
@@ -72,7 +70,8 @@ def main():
 	# prepare data
     trainingSet=[]
     testSet=[]
-    loadDataset('data_random.csv')
+    totalMSE = 0.0
+    loadDataset('data_rt_random.csv')
     print ('Jumlah Data Set 1: ' + repr(len(set1)))
     print ('Jumlah Data Set 2: ' + repr(len(set2)))
     print ('Jumlah Data Set 3: ' + repr(len(set3)))
@@ -104,6 +103,7 @@ def main():
         # print('> predicted=' + repr(result))
     mse = getMSE(testSet, predictions)
     print('MSE Set 1: ' + repr(mse))
+    totalMSE += mse
 	# print('Accuracy: ' + repr(accuracy))
 
     # set 2 become tes set
@@ -125,6 +125,7 @@ def main():
         # print('> predicted=' + repr(result))
     mse = getMSE(testSet, predictions)
     print('MSE Set 2: ' + repr(mse))
+    totalMSE += mse
 
     # set 3 become tes set
     trainingSet=[]
@@ -145,6 +146,7 @@ def main():
         # print('> predicted=' + repr(result))
     mse = getMSE(testSet, predictions)
     print('MSE Set 3: ' + repr(mse))
+    totalMSE += mse
 
     # set 4 become tes set
     trainingSet=[]
@@ -165,6 +167,7 @@ def main():
         # print('> predicted=' + repr(result))
     mse = getMSE(testSet, predictions)
     print('MSE Set 4: ' + repr(mse))
+    totalMSE += mse
 
     # set 5 become tes set
     trainingSet=[]
@@ -185,5 +188,9 @@ def main():
         # print('> predicted=' + repr(result))
     mse = getMSE(testSet, predictions)
     print('MSE Set 5: ' + repr(mse))
+    totalMSE += mse
+
+    totalMSE = totalMSE / 5
+    print('Average MSE: ' + repr(totalMSE))
 
 main()

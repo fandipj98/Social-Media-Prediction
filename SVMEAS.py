@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import csv
 from sklearn.svm import SVC
-from sklearn                        import metrics, svm
+from sklearn import metrics, svm
 
 # import warnings filter
 from warnings import simplefilter
@@ -34,7 +34,8 @@ def loadDataset(filename, filenameTest, trainingSet=[] , testSet=[]):
 def main():
     trainingSet=[]
     testSet=[]
-    loadDataset('data_rt_random.csv', 'data_eas_regression.csv', trainingSet, testSet)
+    loadDataset('data_rt_kfold.csv', 'data_eas_regression.csv', trainingSet, testSet)
+    newFile = open("EAS_17-041_17-053_17-056_SVM.csv", "a")
 
     AtrainData = np.array(trainingSet)
     # print(AtrainData)
@@ -52,7 +53,11 @@ def main():
     clf.fit(aTrainDataGet, bTrainDataGet) 
     y_pred = clf.predict(aTestDataGet)
     
-    print(y_pred)
+    # print(y_pred)
+    for x in y_pred:
+        newFile.write(str(x) + '\n')
+    
+    newFile.close()
 
     # mse = getMSE(testSet, y_pred)
     # print('MSE Set 5: ' + repr(mse))
