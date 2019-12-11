@@ -17,7 +17,7 @@ def loadDataset(filename, filenameTest, trainingSet=[] , testSet=[]):
     with open(filename, 'r') as csvfile:
         lines = csv.reader(csvfile)
         dataset = list(lines)
-        for x in range(153):
+        for x in range(30000):
             trainingSet.append(dataset[x])
     with open(filenameTest, 'r') as csvfileTest:
 	    linesTest = csv.reader(csvfileTest)
